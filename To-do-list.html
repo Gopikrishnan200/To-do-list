@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 400px;
+            height: 100%;
+            background-color: aqua;
+            position: relative;
+            align-items: center;
+            margin: auto;
+            top: 200px;
+        }
+        h1{
+             
+            text-align: center;
+            padding-top: 30px;
+            
+        }
+        form{
+            display: inline;
+            justify-content: space-between;
+            gap: 10px;
+            align-self: center;
+            margin-left: 70px;
+            margin-top: 30px;
+         
+        }
+       
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #302525;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 14px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        ul {
+            
+            padding: 10px;
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bolder;
+        }
+
+        li {
+            
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .del {
+            background-color: #dc3545;
+            margin-left: 5px;
+        }
+         .edit {
+            background-color: #ffc107;
+            margin-left: 10px;
+        }
+         li span {
+            flex: 1;
+        }
+    </style>
+</head>
+<body><div>
+    <h1>To-do List</h1>
+    <form action="" id="to">
+        <input type="text" value="" id="input" placeholder="Enter your task">
+        <button type="submit">add</button>
+        
+    </form>
+    <ul id="ul"></ul>
+    </div>
+    <script>
+    let input=document.getElementById("input")
+    let form=document.getElementById("to")
+    let ul=document.getElementById("ul")
+
+    form.addEventListener("submit",(e)=>{
+        e.preventDefault();
+
+        const task= input.value.trim();
+        if(task==="") return;
+
+        const li=document.createElement("li")
+    
+        li.innerHTML=`<span>${task}</span>
+            <button class="edit"> Edit </button>
+            <button class="del"> Delete</button>`;
+    
+    ul.appendChild(li)
+    input.value="";
+    });
+
+    ul.addEventListener("click",(a)=>{
+        if (a.target.classList.contains("del")) {
+        a.target.parentElement.remove();
+        }
+        
+        if(a.target.classList.contains("edit")){
+            let li= a.target.parentElement;
+            let text = li.querySelector("span").textContent;
+             input.value = text;
+             li.remove();
+        }
+    })
+    </script>
+</body>
+</html>
